@@ -112,6 +112,11 @@
                 font-size: 16px;
             }
         }
+		
+		
+		
+		
+		
     </style>
 	
 	
@@ -136,7 +141,68 @@
             color: white;
             padding: 10px 20px;
             border-radius: 10px;
+	
         }
+		
+		
+		
+	 .referral-link {
+    background: #e6e4ff;
+    width: 66%;
+    padding: 4px;
+    border-radius: 200px;
+    text-align: center;
+    margin: 0 auto; /* ทำให้อยู่ตรงกลางแนวนอน */
+    word-wrap: break-word;
+    font-size: 0.9em;
+    color: #6c48ec;
+    border: 1px solid #d0cfff;
+}
+
+
+        button {
+            background: #6c48ec;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #5739c0;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .action-buttons button {
+            background: #6c48ec;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .action-buttons button:hover {
+            background: #5739c0;
+        }	
+		
+		
+		
+		
+		
+		
+		
 </style>
 	
 	
@@ -151,7 +217,7 @@
     <br><br><br><br><br><br><br><br><br><br><br>
 
     
-	<font size="10">
+	<font size="6">
 	  <class="font-family-orbitron-normal">Whitelist Competition </font></font>
 	 
 	 
@@ -167,7 +233,6 @@
             <div><span id="seconds">48</span>S</div>
         </div>  </h5>
 		
-		<br><br><br>
 	
 	
 	
@@ -176,6 +241,16 @@
 	
 	
 	
+	<div class="container">
+        <h1>Telegram Referral Link</h1>
+        <div class="referral-link" id="referralLink">
+            Generating link...
+        </div>
+        <div class="action-buttons">
+            <button>Swap</button>
+            <button onclick="copyReferral()">Copy Link</button>
+        </div>
+    </div>
 	
 	
 	
@@ -239,6 +314,45 @@
   
   
   </script>
+  
+  
+  
+  
+   <script>
+        // Base URL ของบอท Telegram
+        const baseURL = "https://t.me/Maotao111_bot/";
+
+        // ฟังก์ชันสำหรับสร้าง Referral Link ใหม่
+        function generateReferral() {
+            // สร้างค่า Referral Code แบบสุ่ม
+            const referralCode = Math.random().toString(36).substr(2, 8); // ตัวอย่าง: "abc12345"
+            const newReferralLink = `${baseURL}?start=${referralCode}`;
+
+            // แสดงลิงก์ในหน้าเว็บ
+            const referralLinkElement = document.getElementById('referralLink');
+            referralLinkElement.textContent = newReferralLink;
+
+            return newReferralLink;
+        }
+
+        // ฟังก์ชันคัดลอกลิงก์
+        function copyReferral() {
+            const referralLinkElement = document.getElementById('referralLink');
+            const referralLink = referralLinkElement.textContent;
+
+            // คัดลอกไปยังคลิปบอร์ด
+            navigator.clipboard.writeText(referralLink).then(() => {
+                alert('Referral link copied!');
+            }).catch(() => {
+                alert('Failed to copy referral link.');
+            });
+        }
+
+        // สร้างลิงก์อัตโนมัติเมื่อโหลดหน้าเว็บ
+        window.onload = () => {
+            generateReferral();
+        };
+    </script>
 
 </body>
 </html>
