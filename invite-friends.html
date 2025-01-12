@@ -3,44 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invite Friends</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="material/css/styles.css">
-    <link rel="stylesheet" href="material/css/st.css">
+    <title>Telegram Referral Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            color: #6c48ec;
+            margin-bottom: 20px;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 1em;
+            word-wrap: break-word;
+            color: #333;
+        }
+
+        .result a {
+            color: #6c48ec;
+            text-decoration: none;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+
+        .loading {
+            color: #999;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    
-
-    <div class="frens-invite">
-        <div class="frens-invite-button">
-            <input type="text" value="https://t.me/DOGSclon_bot" id="link" readonly>
-            <button id="copyButton">Copy Link</button>
-        </div>
+    <div class="container">
+        <h1>Generated Telegram Referral Link</h1>
+        <div class="loading" id="loading">Generating your referral link...</div>
+        <div class="result" id="result"></div>
     </div>
 
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
-    <script src="material/js/cojs.js"></script>
-    <script src="material/js/scripts.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        // ตั้งค่า URL บอทที่คุณกำหนดเอง
+        const baseURL = "https://t.me/Maotao111_bot/";
+
+        // ฟังก์ชันสำหรับการสร้าง Referral Link
+        function generateAutoLink() {
+            // ตรวจสอบว่า Telegram Web App พร้อมหรือไม่
+            window.Telegram.WebApp.ready();
+
+            // ดึงข้อมูล user_id จาก Telegram Web App
+            const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+            if (user) {
+                const userId = user.id; // ใช้ user_id จาก Telegram
+                const referralLink = `${baseURL}?start=${userId}`;
+
+                // แสดงผลลิงก์ในหน้าเว็บ
+                const resultDiv = document.getElementById('result');
+                const loadingDiv = document.getElementById('loading');
+                loadingDiv.style.display = "none"; // ซ่อนข้อความ "กำลังโหลด"
+                resultDiv.innerHTML = `
+                    <p>Your referral link:</p>
+                    <a href="${referralLink}" target="_blank">${referralLink}</a>
+                `;
+            } else {
+                document.getElementById('result').innerHTML = "<p>Unable to retrieve user information. Please try again later.</p>";
+            }
+        }
+
+        // เรียกใช้งานฟังก์ชันเมื่อโหลดหน้า
+        generateAutoLink();
+    </script>
 </body>
 </html>
