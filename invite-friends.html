@@ -3,44 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invite Friends</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="material/css/styles.css">
-    <link rel="stylesheet" href="material/css/st.css">
+    <title>Telegram Referral Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #a28aff, #f6e8ff);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            color: #6c48ec;
+            margin-bottom: 20px;
+        }
+
+        .referral-link {
+            background: #e6e4ff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            word-wrap: break-word;
+            font-size: 0.9em;
+            color: #6c48ec;
+            border: 1px solid #d0cfff;
+        }
+
+        button {
+            background: #6c48ec;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #5739c0;
+        }
+    </style>
 </head>
 <body>
-    
-
-    <div class="frens-invite">
-        <div class="frens-invite-button">
-            <input type="text" value="t.me/Maotao111_bot/" id="link" readonly>
-            <button id="copyButton">Copy Link</button>
+    <div class="container">
+        <h1>Telegram Referral Link</h1>
+        <div class="referral-link" id="referralLink">
+            Generating your link...
         </div>
+        <button onclick="copyReferral()">Copy Link</button>
     </div>
 
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
-    <script src="material/js/cojs.js"></script>
-    <script src="material/js/scripts.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        // Base URL ของบอท Telegram
+        const baseURL = "https://t.me/Maotao111_bot/";
+
+        // ฟังก์ชันสำหรับล็อก Referral Link
+        function generateReferralLink() {
+            // ตรวจสอบว่า Telegram Web App พร้อมหรือไม่
+            window.Telegram.WebApp.ready();
+
+            // ดึงข้อมูลผู้ใช้จาก Telegram Web App
+            const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+            if (user) {
+                const username = user.username || user.id; // ใช้ username ถ้ามี ถ้าไม่มีก็ fallback ไปที่ user.id
+                const savedLink = localStorage.getItem(`referral_${username}`); // ตรวจสอบว่ามีลิงก์แล้วหรือยัง
+
+                // ถ้ามีลิงก์ใน LocalStorage อยู่แล้ว ให้แสดงลิงก์เดิม
+                if (savedLink) {
+                    displayReferralLink(savedLink);
+                } else {
+                    // สร้างลิงก์ใหม่และบันทึกใน LocalStorage
+                    const newReferralLink = `${baseURL}?start=${username}`;
+                    localStorage.setItem(`referral_${username}`, newReferralLink);
+                    displayReferralLink(newReferralLink);
+                }
+            } else {
+                document.getElementById('referralLink').textContent = "Unable to retrieve user information.";
+            }
+        }
+
+        // ฟังก์ชันแสดง Referral Link
+        function displayReferralLink(link) {
+            const referralLinkElement = document.getElementById('referralLink');
+            referralLinkElement.textContent = link;
+        }
+
+        // ฟังก์ชันคัดลอก Referral Link
+        function copyReferral() {
+            const referralLinkElement = document.getElementById('referralLink');
+            const referralLink = referralLinkElement.textContent;
+
+            // คัดลอกไปยังคลิปบอร์ด
+            navigator.clipboard.writeText(referralLink).then(() => {
+                alert('Referral link copied!');
+            }).catch(() => {
+                alert('Failed to copy referral link.');
+            });
+        }
+
+        // เรียกใช้งานฟังก์ชันเมื่อโหลดหน้า
+        window.onload = () => {
+            generateReferralLink();
+        };
+    </script>
 </body>
 </html>
