@@ -242,7 +242,8 @@
 	
 	
 	
-	
+	  <!-- Rank -->
+        <div class="rank">My Rank: <span id="rank">1</span>/50000</div>
 	
 	
 	
@@ -313,7 +314,7 @@
   
    <script>
         // Base URL ของบอท Telegram
-        const baseURL = "https://t.me/Maotao111_bot/";
+        const baseURL = "https://t.me/dragontonapp_bot/";
 
         // ฟังก์ชันสำหรับสร้าง Referral Link ใหม่
         function generateReferral() {
@@ -345,6 +346,16 @@
         window.onload = () => {
             generateReferral();
         };
+		
+		
+		
+		  // Rank Logic
+        let rank = localStorage.getItem("rank") || 1;
+        document.getElementById("rank").textContent = rank;
+		
+		
+		
+		
     </script>
 
 </body>
