@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generate Referral Link</title>
+    <title>Telegram Referral Link</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,60 +59,55 @@
         button:hover {
             background: #5739c0;
         }
-
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .action-buttons button {
-            background: #6c48ec;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 15px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .action-buttons button:hover {
-            background: #5739c0;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Telegram Referral Link</h1>
         <div class="referral-link" id="referralLink">
-            Generating link...
+            Generating your link...
         </div>
-        <div class="action-buttons">
-            <button>Swap</button>
-            <button onclick="copyReferral()">Copy Link</button>
-        </div>
+        <button onclick="copyReferral()">Copy Link</button>
     </div>
 
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         // Base URL ของบอท Telegram
         const baseURL = "https://t.me/Maotao111_bot/";
 
-        // ฟังก์ชันสำหรับสร้าง Referral Link ใหม่
-        function generateReferral() {
-            // สร้างค่า Referral Code แบบสุ่ม
-            const referralCode = Math.random().toString(36).substr(2, 8); // ตัวอย่าง: "abc12345"
-            const newReferralLink = `${baseURL}?start=${referralCode}`;
+        // ฟังก์ชันสำหรับล็อก Referral Link
+        function generateReferralLink() {
+            // ตรวจสอบว่า Telegram Web App พร้อมหรือไม่
+            window.Telegram.WebApp.ready();
 
-            // แสดงลิงก์ในหน้าเว็บ
-            const referralLinkElement = document.getElementById('referralLink');
-            referralLinkElement.textContent = newReferralLink;
+            // ดึงข้อมูลผู้ใช้จาก Telegram Web App
+            const user = window.Telegram.WebApp.initDataUnsafe.user;
 
-            return newReferralLink;
+            if (user) {
+                const userId = user.id; // ใช้ user_id เป็นตัวกำหนด Referral Link
+                const savedLink = localStorage.getItem(`referral_${userId}`); // ตรวจสอบว่ามีลิงก์แล้วหรือยัง
+
+                // ถ้ามีลิงก์ใน LocalStorage อยู่แล้ว ให้แสดงลิงก์เดิม
+                if (savedLink) {
+                    displayReferralLink(savedLink);
+                } else {
+                    // สร้างลิงก์ใหม่และบันทึกใน LocalStorage
+                    const newReferralLink = `${baseURL}?start=${userId}`;
+                    localStorage.setItem(`referral_${userId}`, newReferralLink);
+                    displayReferralLink(newReferralLink);
+                }
+            } else {
+                document.getElementById('referralLink').textContent = "Unable to retrieve user information.";
+            }
         }
 
-        // ฟังก์ชันคัดลอกลิงก์
+        // ฟังก์ชันแสดง Referral Link
+        function displayReferralLink(link) {
+            const referralLinkElement = document.getElementById('referralLink');
+            referralLinkElement.textContent = link;
+        }
+
+        // ฟังก์ชันคัดลอก Referral Link
         function copyReferral() {
             const referralLinkElement = document.getElementById('referralLink');
             const referralLink = referralLinkElement.textContent;
@@ -125,9 +120,9 @@
             });
         }
 
-        // สร้างลิงก์อัตโนมัติเมื่อโหลดหน้าเว็บ
+        // เรียกใช้งานฟังก์ชันเมื่อโหลดหน้า
         window.onload = () => {
-            generateReferral();
+            generateReferralLink();
         };
     </script>
 </body>

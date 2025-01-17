@@ -124,27 +124,73 @@
 	
 	
 	<style>
-          .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            
-            padding: 0px;
-            border-radius: 0px;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .countdown div {
-            background: #6c48ec;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
 	
-        }
+	   /* สไตล์พื้นฐาน */
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background-image: url('material/images/05.webp');
+      color: white;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* เลื่อนเนื้อหาขึ้นด้านบน */
+      align-items: center;
+      height: 100vh;
+      padding-top: 50px; /* ระยะห่างจากขอบบน */
+    }
+	
+          h1 {
+      font-size: 1.0rem;
+      margin-bottom: 30px;
+      color: #ffe4e1; /* สีอ่อน */
+      text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    #countdown {
+      display: flex;
+      gap: 10px;
+      font-size: 1.0rem;
+      font-weight: bold;
+    }
+
+    .time-box {
+      background: linear-gradient(145deg, #6a0dad, #9d50bb); /* ไล่สีม่วงหรู */
+      border: 0.2px solid rgba(255, 255, 255, 0.3);
+      padding: 0.2px;
+      border-radius: 20px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      min-width: 100px;
+      animation: pulse 1.5s infinite;
+    }
+
+    .time-box .number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .time-box .label {
+      font-size: 0.8rem;
+      font-weight: normal;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+  </style>
 		
-		
+	<style>	
 		
 	 .referral-link {
     background: #e6e4ff;
@@ -200,46 +246,104 @@
 		
 		
 		
-		
-		
+		 /* สไตล์ปุ่ม */
+    .submit-button {
+      background: linear-gradient(45deg, #ff0000, #ff5757); /* สีแดงไล่เฉด */
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 30px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.7);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+	
+
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%; /* ปรับขนาดสูงสุดตามหน้าจอ */
+    overflow: hidden; /* ซ่อนส่วนที่เกิน */
+}
+
+.video-container video {
+    width: 100%; /* ปรับความกว้างให้พอดีกับหน้าจอ */
+    height: 70%; /* ให้ความสูงปรับตามอัตราส่วนของวิดีโอ */
+}
+
+
+	
+  .col-lg-6 {
+      margin: 0; /* ลบ margin */
+      padding: 0; /* ลบ padding */
+      position: absolute; /* ใช้ absolute positioning */
+      top: 0; /* ชิดขอบบน */
+      left: 0; /* เริ่มจากด้านซ้ายของจอ */
+      width: 100%; /* กำหนดความกว้างเต็มจอ */
+      text-align: center; /* จัดให้องค์ประกอบภายในอยู่กึ่งกลาง */
+    }
+
+    /* จัดการรูปภาพ */
+    .col-lg-6 img {
+      max-width: 100%; /* ให้ตอบสนองต่อหน้าจอ */
+      height: auto; /* รักษาสัดส่วนรูปภาพ */
+    }
+	
+	
 		
 		
 </style>
 	
 	
 	
-	
-	
+	 
 	
 	
 	
 </head>
 <body>
    
-    <br><br>
+   
+   <br>
+   
+   <div class="col-lg-6">
+            <img src="material/images/778.png" class="img img-fluid" />
+          </div>
+   
+   
+   
+   
+    <br><br><br>
 
 
    
-    <br><br><br><br><br><br><br><br><br><br><br>
+ 
 
     
-	<font size="5">
-	  <h1> <class="font-family-orbitron-normal">WHITELIST COMPETITION </font></font> </h1>
-	 
-	 
-	 
-	 
-          <h5 class="mt-4">
-			
-			        <!-- Countdown Timer -->
-        <div class="countdown" id="countdown">
-            <div><span id="days">6</span>D</div>
-            <div><span id="hours">18</span>H</div>
-            <div><span id="minutes">17</span>M</div>
-            <div><span id="seconds">48</span>S</div>
-        </div>  </h5>
-		
+
+  <div id="countdown">
+    <!-- กรอบเวลาจะถูกเติมโดย JavaScript -->
+  </div>
 	
+	<br>
 	
 	
 
@@ -247,17 +351,38 @@
 	
 	
 	
+	
+	
+	
+	 <div class="video-container">
+    <video autoplay muted loop controls>
+      <source src="material/55.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video> 
+	
+	
+	
+	
+	
+	 
+	
+	<br><br>
+	
 	<div class="container">
-        <font color="white"> Telegram Referral Link </font>
+        <font color="white"> WHITELIST COMPETITION , 5% Share Profit</font><br><br>
         <div class="referral-link" id="referralLink">
             Generating link...
         </div>
+		
+		
         <div class="action-buttons">
 		<button onclick="copyReferral()">Copy Link</button>
 		
 		<a href="wat - Copy - Copy - Copy.html"> <button>Chart</button>
 		
-           <a href="https://dedust.io/swap"> <button>Swap</button>
+           <a href="https://dedust.io/swap/TON/EQB76x6QTODEyoUFGPVSB15cNOCsBqh7zuHaE812vLfEtDxz"> <button>Swap</button>
+		   
+		   <a href="https://dragonton.org"> <button>Website</button>
             
 			
         </div>
@@ -280,25 +405,50 @@
     
 	
 	
-	 <script>
-        // Countdown Logic
-        const targetDate = new Date("January 19, 2025 18:00:00").getTime();
+	<script>
+    function updateCountdown() {
+      const targetDate = new Date('2025-01-22T18:00:00'); // วันที่เป้าหมาย
+      const now = new Date();
+      const diff = targetDate - now;
 
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = `
+          <div class="time-box">
+            <div class="number">🎉</div>
+            <div class="label">Time's up!</div>
+          </div>`;
+        clearInterval(timerInterval);
+        return;
+      }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            document.getElementById("days").textContent = days;
-            document.getElementById("hours").textContent = hours;
-            document.getElementById("minutes").textContent = minutes;
-            document.getElementById("seconds").textContent = seconds;
-        }, 1000);
-    </script> 
+      // อัปเดต HTML สำหรับกรอบแต่ละส่วน
+      document.getElementById('countdown').innerHTML = `
+        <div class="time-box">
+          <div class="number">${days}</div>
+          <div class="label">Days</div>
+        </div>
+        <div class="time-box">
+          <div class="number">${hours}</div>
+          <div class="label">Hours</div>
+        </div>
+        <div class="time-box">
+          <div class="number">${minutes}</div>
+          <div class="label">Minutes</div>
+        </div>
+        <div class="time-box">
+          <div class="number">${seconds}</div>
+          <div class="label">Seconds</div>
+        </div>`;
+    }
+
+    const timerInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
   
   
   <script src="assets/js/cojs.js"></script>

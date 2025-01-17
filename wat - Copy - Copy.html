@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alien Mine Whitelist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000 url('https://source.unsplash.com/random/900x1600?space') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header {
+            background: #41d350;
+            padding: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-shadow: 2px 2px #000;
+        }
+
+        .sub-header {
+            background: #f037a5;
+            padding: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: #222;
+        }
+
+        .countdown div {
+            padding: 10px;
+            background: #ffe90a;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #000;
+            min-width: 60px;
+        }
+
+        .rank {
+            margin: 20px;
+            font-size: 1.3em;
+            color: #ffe90a;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 20px 0;
+            background: #333;
+            padding: 10px 0;
+        }
+
+        .tabs button {
+            border: none;
+            background: #41d350;
+            padding: 10px 15px;
+            border-radius: 20px;
+            color: #000;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tabs button:hover {
+            background: #28a745;
+        }
+
+        .graph-section {
+            margin: 20px;
+            background: #111;
+            border-radius: 10px;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        iframe {
+            border: none;
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+	
+	
+	<style>#dexscreener-embed{position:relative;width:100%;padding-bottom:125%;}@media(min-width:1400px){#dexscreener-embed{padding-bottom:65%;}}#dexscreener-embed iframe{position:absolute;width:100%;height:100%;top:0;left:0;border:0;}</style>
+	
+	
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">Alien Mine</div>
+        <div class="sub-header">Whitelist Competition</div>
+
+        <!-- Countdown -->
+        <div class="countdown" id="countdown">
+            <div><span id="days">8</span>D</div>
+            <div><span id="hours">0</span>H</div>
+            <div><span id="minutes">28</span>M</div>
+            <div><span id="seconds">56</span>S</div>
+        </div>
+
+        <!-- Rank -->
+        <div class="rank">My Rank: <span id="rank">1</span>/50000</div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button>Information</button>
+            <button>Ranking</button>
+            <button>Chart</button>
+        </div>
+
+        
+		</div>
+		
+		
+		
+		
+		
+		
+		<div id="dexscreener-embed"><iframe src="https://dexscreener.com/ton/EQAMO1c3WS_MsAF4rlEZjpMe3BQ50iLyqCEIl0pvYzyFBWtw?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=light&chartStyle=0&chartType=usd&interval=15"></iframe></div>
+		
+
+    <script>
+        // Countdown Timer
+        const targetDate = new Date("January 19, 2025 18:00:00").getTime();
+
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }, 1000);
+
+        // Rank Logic
+        let rank = localStorage.getItem("rank") || 1;
+        document.getElementById("rank").textContent = rank;
+    </script>
+</body>
+</html>
